@@ -18,4 +18,7 @@ public class CollectibleTreasure : MonoBehaviour
 
     // from Nick's in-class code
     public float treasureValue=0.0f;
+    public string prefabName;
+
+
 }
