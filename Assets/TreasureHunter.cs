@@ -67,27 +67,33 @@ public class TreasureHunter : MonoBehaviour
             RaycastHit hit;
             if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit)) {
                 GameObject gothit = hit.collider.gameObject;
-                CollectibleTreasure ct = gothit.GetComponent<CollectibleTreasure>();
-                Debug.Log(gothit.name);
-                CollectibleTreasure prefabOfClickedObject = Resources.Load<CollectibleTreasure>(ct.prefabName);
-                inventory.inventoryItems.Add(prefabOfClickedObject);
-                Destroy(hit.collider.gameObject);
-                count++;
-            OnClick4Text.text = "Vinish Kumar Total Score: " + calculateScore() + " Count: " + count;
+                if(gothit.GetComponent<CollectibleTreasure>() == null) {
+                    Debug.Log("hit nothing");
+                }
+                else {
+                    CollectibleTreasure ct = gothit.GetComponent<CollectibleTreasure>();
+                    Debug.Log(gothit.name);
+                    CollectibleTreasure prefabOfClickedObject = Resources.Load<CollectibleTreasure>(ct.prefabName);
+                    inventory.inventoryItems.Add(prefabOfClickedObject);
+                    Destroy(hit.collider.gameObject);
+                    count++;
+                }
+                
+            //OnClick4Text.text = "Vinish Kumar Total Score: " + calculateScore() + " Count: " + count;
             } else {
             Debug.Log("hit nothing");
             }
 
         }
         
-        if(Input.GetKeyDown(KeyCode.Alpha4)) {
+        /*if(Input.GetKeyDown(KeyCode.Alpha4)) {
             Debug.Log("Total Score: " + calculateScore());
             OnClick4Text.text = "Vinish Kumar Total Score: " + calculateScore() + " Count: " + count;
-        }
+        }*/
     }
 
     // from Nick's code
-    float calculateScore() {
+    /*float calculateScore() {
         List<CollectibleTreasure> collectibleTreasures = this.gameObject.GetComponent<TreasureHunterInventory>().inventoryItems;
         float totalScore=0;
         foreach(CollectibleTreasure treasure in collectibleTreasures) {
@@ -95,5 +101,5 @@ public class TreasureHunter : MonoBehaviour
         }
         currentTotalScore=totalScore;
         return totalScore;
-    }
+    }*/
 }
